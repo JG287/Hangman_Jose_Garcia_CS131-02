@@ -13,8 +13,6 @@ public class Application {
 
 		Hangman h = new Hangman();
 		h.playGame();
-		h.loadWinLoss();
-		h.writeWinLoss();	
 	}
 	
 }

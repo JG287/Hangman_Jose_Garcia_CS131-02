@@ -1,8 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -31,7 +29,7 @@ public class Hangman {
      */
     public Hangman() {
 
-        Dictionary d = new Dictionary("200.txt");
+        Dictionary d = new Dictionary("src/200.txt");
     }
 
     /**
@@ -42,11 +40,12 @@ public class Hangman {
      * @see IOException.
      */
     private void loadWL() throws IOException {
-        File file = new File("Seed.txt");
+        File file = new File("src/Seed.txt");
         Scanner scan = new Scanner(file);
         scan.useDelimiter(",");
         wins = scan.nextInt();
         losses = scan.nextInt();
+        scan.close();
     }
 
     /**
@@ -58,7 +57,7 @@ public class Hangman {
      */
     private void writeWL() throws IOException {
 
-        FileWriter myWriter = new FileWriter("Seed.txt");
+        FileWriter myWriter = new FileWriter("src/Seed.txt");
         String w = String.valueOf(wins);
         String l = String.valueOf(losses);
         String result = w + "," + l;
@@ -75,16 +74,16 @@ public class Hangman {
      */
     public void playGame() {
 
-        Dictionary d = new Dictionary("200.txt");
-        Scanner scan = new Scanner(System.in);
+        Dictionary d = new Dictionary("src/200.txt");
+        Scanner scn = new Scanner(System.in);
         String randomWord = d.chooseWord();
         String guess;
-        int count = 5;
+        int count = 6;
         char[] ch = randomWord.toCharArray();
         char[] chars = new char[ch.length];
         Arrays.fill(chars, '-');
         System.out.print("Would you like to play Y/N? ");
-        String userInput = scan.nextLine();
+        String userInput = scn.nextLine();
         if (userInput.equals("N")) {
             System.out.println("You have a total of " + wins + " wins and " + losses + " losses");
         }
@@ -94,7 +93,7 @@ public class Hangman {
                 boolean b = false;
                 System.out.print("\nYou have " + count + " guesses left. ");
                 System.out.print("\nWhat is your guess? ");
-                guess = scan.next();
+                guess = scn.next();
                 char c = guess.charAt(0);
                 for (int i = 0; i < chars.length; i++) {
                     if (randomWord.charAt(i) == c) {
@@ -111,7 +110,7 @@ public class Hangman {
             if (String.valueOf(chars).equals(randomWord)) {
                 System.out.println("\n\nYou win!");
                 System.out.println("Would you like to play again Y/N? ");
-                userInput = scan.next();
+                userInput = scn.next();
 
                 if (userInput.equals("N")) {
                     System.out.println("You have a total of " + wins + " wins and " + losses + " losses");
@@ -123,7 +122,7 @@ public class Hangman {
             if (count == 0) {
                 System.out.println("\n\nYou lose!");
                 System.out.println("You are out of guesses! Would you like to play again Y/N? ");
-                userInput = scan.next();
+                userInput = scn.next();
 
                 if (userInput.equals("N")) {
                     System.out.println("You have a total of " + wins + " wins and " + losses + " losses");
@@ -132,22 +131,7 @@ public class Hangman {
                     this.playGame();
                 }
             }
+            scn.close();
         }
     }
-    public void writeWinLoss() throws IOException {
-    	Writer see = new FileWriter("Seed.txt");
-    	see.write(wins + "\n" + losses);
-    }
-
-	public void loadWinLoss() throws FileNotFoundException {
-		try {
-			File tee = new File("Seed.txt");
-			Scanner scr = new Scanner(tee);
-			wins = scr.nextInt();
-			losses = scr.nextInt();
-			scr.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 }
