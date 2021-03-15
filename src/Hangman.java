@@ -29,7 +29,7 @@ public class Hangman {
      */
     public Hangman() {
 
-        Dictionary d = new Dictionary("src/200.txt");
+        Dictionary d = new Dictionary("200.txt");
     }
 
     /**
@@ -40,7 +40,7 @@ public class Hangman {
      * @see IOException.
      */
     private void loadWL() throws IOException {
-        File file = new File("src/Seed.txt");
+        File file = new File("Seed.txt");
         Scanner scan = new Scanner(file);
         scan.useDelimiter(",");
         wins = scan.nextInt();
@@ -57,7 +57,7 @@ public class Hangman {
      */
     private void writeWL() throws IOException {
 
-        FileWriter myWriter = new FileWriter("src/Seed.txt");
+        FileWriter myWriter = new FileWriter("Seed.txt");
         String w = String.valueOf(wins);
         String l = String.valueOf(losses);
         String result = w + "," + l;
@@ -74,7 +74,7 @@ public class Hangman {
      */
     public void playGame() {
 
-        Dictionary d = new Dictionary("src/200.txt");
+        Dictionary d = new Dictionary("200.txt");
         Scanner scn = new Scanner(System.in);
         String randomWord = d.chooseWord();
         String guess;

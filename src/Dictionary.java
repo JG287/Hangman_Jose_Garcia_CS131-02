@@ -23,7 +23,7 @@ public class Dictionary {
 
 	public Dictionary(String fileName) {
 
-		readFile("src/200.txt");
+		readFile("200.txt");
 	}
 	/**
 	 * This method is used to read a file, and then scan through each line. Once
@@ -36,7 +36,7 @@ public class Dictionary {
 	 */
 	private void readFile(String fileName) {
 
-		File file = new File("src/200.txt");
+		File file = new File("200.txt");
 		try (Scanner scan = new Scanner(file)) {
 			int index = 0;
 			while (scan.hasNext()) {
